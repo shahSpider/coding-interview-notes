@@ -19,3 +19,7 @@
     b is the bias of the model. Bias is the same concept as the y-intercept in the algebraic equation for a line. In ML, bias is sometimes referred to as w0. Bias is a parameter of the model and is calculated during training.
     w1 is the weight of the feature. Weight is the same concept as the slope m in the algebraic equation for a line. Weight is a parameter of the model and is calculated during training.
     x1 is a feature—the input.
+
+
+References:
++ https://developers.google.com/machine-learning/crash-course/linear-regression/gradient-descent
