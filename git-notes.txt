@@ -1,0 +1,55 @@
+🍒 What is git cherry-pick?
+
+Cherry-pick = copy ONE (or more) specific commit(s) from another branch and apply them to your current branch.
+
+You are not merging the whole branch — just hand-picking commits.
+
+🔹 Simple Example
+main:     A --- B --- C
+feature:        D --- E --- F
+
+
+You only want commit E on main.
+
+git checkout main
+git cherry-pick <commit-hash-of-E>
+
+
+Result:
+
+main:     A --- B --- C --- E'
+feature:        D --- E --- F
+
+
+✔ Only commit E is copied
+✔ New commit hash (E')
+❌ History is duplicated
+
+🔹 Why would you use cherry-pick?
+✅ Common real-world use cases
+
+Hotfix
+
+Bug fixed in develop
+
+Production needs it NOW
+
+Cherry-pick that commit into main
+
+Partial feature
+
+Feature branch has 10 commits
+
+Only 1 is ready
+
+Cherry-pick that commit
+
+Backporting
+
+Fix in latest version
+
+Apply same fix to older release branch
+
+Undo a bad merge
+
+Revert + cherry-pick clean commits

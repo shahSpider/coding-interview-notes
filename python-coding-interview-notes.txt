@@ -70,18 +70,22 @@ Object Type
 Mutable?
 Same Memory on Assignment?
 Memory Changes on Modification?
+
 dict
 ✅ Yes
 ✅ Yes (reference copied)
 ❌ No (changes in place)
+
 list
 ✅ Yes
 ✅ Yes
 ❌ No
+
 str
 ❌ No
 ✅ Yes (until reassigned)
 ✅ Yes (creates new object)
+
 int
 ❌ No
 ✅ Yes (until reassigned)
@@ -280,6 +284,102 @@ Real-World Use Cases for Generators
 An iterator is an object that represents a stream of data — you can loop through it one element at a time, but only in one direction.
 All generators are iterators,
 but not all iterators are generators.
+
+# Iterator vs Generator
+
+Absolutely! Let’s go deeper into the **differences between `iter(list)` and a generator expression** in terms of:
+
+* 🔋 **Memory usage**
+* 🔁 **Reusability**
+
+---
+
+## 🔋 1. **Memory Usage**
+
+### ✅ `iter(list)`:
+
+```python
+my_list = [1, 2, 3]
+it = iter(my_list)
+```
+
+* The **list already exists in memory**, so `iter()` just creates a **lightweight wrapper** around it.
+* You're **not saving memory**, you're just **consuming the same list lazily**.
+* The entire list is still stored in RAM.
+
+### ✅ `(x for x in list)` (Generator expression):
+
+```python
+gen = (x for x in my_list)
+```
+
+* The generator **does not store values in memory**.
+* It generates each value **on-the-fly** as you loop or call `next()`.
+* This is **memory-efficient**, especially for **large datasets or infinite streams**.
+
+---
+
+### 💡 TL;DR:
+
+| Operation            | Memory Usage                                    |
+| -------------------- | ----------------------------------------------- |
+| `iter(list)`         | List is **already in memory**                   |
+| Generator expression | Values are **created on demand** — saves memory |
+
+---
+
+## 🔁 2. **Reusability**
+
+### ✅ `iter(list)`:
+
+```python
+it1 = iter(my_list)
+it2 = iter(my_list)
+```
+
+* Since the original list is unchanged, you can create **new iterators again and again**.
+* You can even re-iterate over the list with a `for` loop later.
+
+### ❌ Generator expression:
+
+```python
+gen = (x for x in my_list)
+```
+
+* A generator is a **one-time-use** object.
+* Once you **exhaust it** (by looping or calling `next()`), it’s **done forever**.
+
+```python
+for i in gen:
+    print(i)  # This works
+
+for i in gen:
+    print(i)  # Nothing prints! It's already exhausted
+```
+
+---
+
+### 💡 TL;DR:
+
+| Operation            | Reusability              |
+| -------------------- | ------------------------ |
+| `iter(list)`         | ✅ Can recreate iterators |
+| Generator expression | ❌ One-time use only      |
+
+---
+
+## ✅ Summary Table
+
+| Feature      | `iter(list)`                    | Generator Expression (`(x for x in list)`) |
+| ------------ | ------------------------------- | ------------------------------------------ |
+| Memory usage | List is already in memory       | Creates values lazily (saves memory)       |
+| Reusability  | Can call `iter()` again anytime | Once used, it's exhausted                  |
+| Use case     | When you already have the data  | When you want efficient, on-the-fly values |
+
+---
+
+Let me know if you'd like a quick demo showing memory usage with a large dataset or need help writing a custom generator with `yield`.
+
 
 
 🧠 What is GIL?

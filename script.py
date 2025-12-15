@@ -1,13 +1,5 @@
-def is_divisible(func):
-    def inner(x, y):
-        if y == 0:
-            raise ValueError(f"divider can not be 0, got {y}")
-        else:
-            return True
-    return inner
-        
-@is_divisible
-def divide_it(x, y):
-    return x/y
+def odds(start, stop):
+    for odd in range(start, stop + 1, 2):
+        yield odd
 
-divide_it(10, 1)
+x, y = 100, 100

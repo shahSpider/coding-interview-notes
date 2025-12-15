@@ -1,0 +1,9 @@
+{
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/bin": true,
+        "**/include": true,
+        "**/lib": true,
+        "**/lib64": true
+    }
+}
